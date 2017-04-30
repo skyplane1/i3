@@ -1,0 +1,301 @@
+;=====================================================
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/jaagr/polybar
+;
+;   The README contains alot of information
+;
+;=====================================================
+
+[colors]
+;background = ${xrdb:color0:#222}
+background = #222
+background-alt = #444
+;foreground = ${xrdb:color7:#222}
+foreground = #dfdfdf
+foreground-alt = #555
+primary = #ffb52a
+secondary = #e60053
+alert = #bd2c40
+white = #ffffff
+gray = #474747
+orange = #F59F00
+
+[bar/example]
+;monitor = ${env:MONITOR:HDMI-1}
+width = 100%
+height = 27
+;offset-x = 1%
+offset-y = 50%
+radius = 1.0
+fixed-center = false
+bottom = true
+margin-top = 2
+
+
+underline-size = 3
+underline-color = ${colors.orange}
+
+overline-size = 0
+overline-color = ${colors.gray}
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+line-color = #f00
+
+;border-size = 0
+;border-color = #00000000
+; Values applied to all borders
+; Individual side values can be defined using:
+border-top-size = 3
+border-top-color= ${colors.gray}
+;border-size =
+;border-color =
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 1
+
+font-0 = Noto Sans:pixelsize=10:antialias=true;2
+font-1 = hack-regular:fontformat=truetype:size=11:antialias=true;3
+font-2 = FontAwesome:fontformat=truetype:size=10:antialias=true;2
+
+modules-left = workspaces
+modules-center = xwindow
+modules-right = backlight volume wlan eth battery date powermenu
+tray-position = right
+tray-padding = 2
+tray-transparent = true
+;tray-background = #0063ff
+
+;wm-restack = bspwm
+wm-restack = i3
+
+;override-redirect = true
+
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+;underline-size = 3
+;overline-size = 3
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:50:...%
+label-maxlen = 50
+format-overline = ${colors.gray}
+
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+
+label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+label-unmounted = %mountpoint% not mountedth
+label-unmounted-foreground = ${colors.foreground-alt}
+
+[module/workspaces]
+type = internal/i3
+enable-click = true
+enable-scroll = false
+strip-wsnumbers = true
+format-underline = ${colors.orange}
+
+
+icon-0 = 1;  
+icon-1 = 2;  
+icon-2 = 3;  
+icon-3 = 4;  
+icon-4 = 5;  CodeBlocks
+icon-default =  
+
+label-focused-padding = 2
+label-focused-foreground = #ffffff
+label-focused-background = ${colors.gray}
+label-focused-underline = ${colors.orange}
+
+label-unfocused-padding = 2
+label-visible-padding = 2
+label-unfocused-underline = ${colors.background}
+
+label-urgent-padding = 2
+label-urgent-background = ${colors.alert}
+
+
+[module/wlan]
+type = internal/network
+interface = wlp6s0
+interval = 3.0
+
+format-connected-padding = 2
+format-disconnected-padding = 2
+
+format-connected = <label-connected>
+format-connected-overline = ${colors.gray}
+format-disconnected-overline = ${colors.gray}
+
+label-connected = %essid%
+label-disconnected = 
+label-disconnected-foreground = ${colors.gray}
+
+
+[module/eth]
+type = internal/network
+interface = enp7s0
+interval = 3.0
+
+format-connected-overline = #55aa55
+format-connected-prefix = " "
+format-connected-prefix-foreground = ${colors.foreground-alt}
+label-connected = %local_ip%
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-overline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+[module/date]
+type = internal/date
+interval = 1
+
+date = 
+date-alt = " %Y-%m-%d"
+
+
+time =    %A, %d %B    %l:%M %P
+time-alt = %H:%M:%S
+
+format-prefix =
+format-prefix-foreground = ${colors.foreground-alt}
+format-overline = #0a6cf5
+
+label = %date% %time%
+
+[module/volume]
+type = internal/volume
+
+format-volume = <label-volume> <bar-volume>
+label-volume = 
+label-volume-foreground = ${root.foreground}
+
+format-muted-prefix = " "
+format-muted-foreground = ${colors.foreground-alt}
+label-muted = 
+
+bar-volume-width = 10
+bar-volume-foreground-0 = #55aa55
+bar-volume-foreground-1 = #55aa55
+bar-volume-foreground-2 = #55aa55
+bar-volume-foreground-3 = #55aa55
+bar-volume-foreground-4 = #55aa55
+bar-volume-foreground-5 = #f5a70a
+bar-volume-foreground-6 = #ff5555
+bar-volume-gradient = false
+bar-volume-indicator = |
+bar-volume-indicator-font = 2
+bar-volume-fill = ─
+bar-volume-fill-font = 2
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.foreground-alt}
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC
+full-at = 98
+
+format-full-background = ${colors.background}
+format-charging-background = ${colors.background}
+format-charging = "⁣  <label-charging> <animation-charging> "
+format-charging-overline = ${colors.primary}
+
+format-discharging-background = ${colors.background}
+format-discharging = "⁣ <label-discharging> <ramp-capacity> "
+format-discharging-overline = ${self.format-charging-overline}
+
+format-full-prefix-foreground = ${colors.background}
+format-full-overline = ${self.format-charging-overline}
+
+format-charing-background = ${colors.background}
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-foreground = ${colors.foreground}
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-foreground = ${colors.foreground}
+animation-charging-framerate = 500
+
+
+[module/backlight]
+type = internal/xbacklight
+
+format = <label> <bar>
+label =  
+
+bar-width = 10
+bar-indicator = |
+bar-indicator-foreground = #ff
+bar-indicator-font = 2
+bar-fill = ─
+bar-fill-font = 2
+bar-fill-foreground = #9f78e1
+bar-empty = ─
+bar-empty-font = 2
+bar-empty-foreground = ${colors.foreground-alt}
+
+
+
+[module/powermenu]
+type = custom/menu
+
+format = <label-toggle> <menu>
+;format-underline = ${colors.white}
+format-padding = 1
+format-margin = 1
+
+;format-background = ${colors.black}
+
+menu-0-0 =    
+menu-0-0-exec = shutdown now
+menu-0-1 =    
+menu-0-1-exec = shutdown -r now
+menu-0-2 =  
+menu-0-0-padding = 5
+menu-0-1-padding = 4    
+label-open = 
+label-close =
+
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+
+
+; vim:ft=dosini
