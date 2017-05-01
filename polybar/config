@@ -35,7 +35,7 @@ bottom = true
 margin-top = 2
 
 
-underline-size = 3
+underline-size = 2
 underline-color = ${colors.blue}
 
 overline-size = 0
@@ -128,7 +128,7 @@ label-focused-underline = ${colors.blue}
 
 label-unfocused-padding = 2
 label-visible-padding = 2
-label-unfocused-underline = #66333333
+label-unfocused-underline = ${colors.background}
 
 label-urgent-padding = 2
 label-urgent-background = #5a000000
